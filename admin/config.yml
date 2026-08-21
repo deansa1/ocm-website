@@ -13,35 +13,40 @@ display_url: "https://ocm-website-draft-12hlb4xuy-deansa-9341s-projects.vercel.a
 logo_url: "/assets/logo-lockup.webp"
 
 collections:
-  - name: "articles"
-    label: "Articles"
-    folder: "content/articles"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    summary: "{{title}} — {{date}}"
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Summary", name: "summary", widget: "text"}
-      - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false}
-      - {label: "Author", name: "author", widget: "string", default: "OCM"}
-      - {label: "Featured Image", name: "image", widget: "image", required: false}
-      - {label: "Body", name: "body", widget: "markdown"}
-
-  - name: "resources"
-    label: "Resources"
-    folder: "content/resources"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    summary: "{{title}} — {{type}}"
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Resource Type", name: "type", widget: "select", options: ["Guide", "Template", "Book", "Training", "Other"]}
-      - {label: "Summary", name: "summary", widget: "text"}
-      - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false}
-      - {label: "Image", name: "image", widget: "image", required: false}
-      - {label: "Download / External URL", name: "url", widget: "string", required: false}
-      - {label: "Body", name: "body", widget: "markdown", required: false}
+  - name: "site_content"
+    label: "Website Content"
+    files:
+      - name: "articles"
+        label: "Articles"
+        file: "content/articles.json"
+        format: "json"
+        fields:
+          - label: "Articles"
+            name: "articles"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Slug", name: "slug", widget: "string", hint: "Lowercase words separated by hyphens, e.g. protecting-learning-time"}
+              - {label: "Summary", name: "summary", widget: "text"}
+              - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false}
+              - {label: "Author", name: "author", widget: "string", default: "OCM"}
+              - {label: "Featured Image", name: "image", widget: "image", required: false}
+              - {label: "Body", name: "body", widget: "markdown"}
+      - name: "resources"
+        label: "Resources"
+        file: "content/resources.json"
+        format: "json"
+        fields:
+          - label: "Resources"
+            name: "resources"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Resource Type", name: "type", widget: "select", options: ["Guide", "Template", "Book", "Training", "Other"]}
+              - {label: "Summary", name: "summary", widget: "text"}
+              - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false}
+              - {label: "Image", name: "image", widget: "image", required: false}
+              - {label: "Download / External URL", name: "url", widget: "string", required: false}
+              - {label: "Body", name: "body", widget: "markdown", required: false}
