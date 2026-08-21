@@ -36,12 +36,17 @@ export default async function handler(req, res) {
   const payload = JSON.stringify({ token: tokenData.access_token, provider: 'github' }).replace(/</g, '\\u003c');
   res.setHeader('Set-Cookie', 'decap_oauth_state=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0');
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.status(200).send(`<!doctype html><html><body><p>Login complete. You can close this window.</p><script>
+  res.status(200).send(`<!doctype html><html><body><p>Login complete. Returning to OCM Content Manager...</p><script>
     (function(){
-      var msg = 'authorization:github:success:' + ${JSON.stringify(payload)};
-      if (window.opener) {
-        window.opener.postMessage(msg, window.location.origin);
+      var successMessage = 'authorization:github:success:' + ${JSON.stringify(payload)};
+      function receiveMessage(e) {
+        if (!window.opener) return;
+        window.opener.postMessage(successMessage, e.origin);
         setTimeout(function(){ window.close(); }, 500);
+      }
+      window.addEventListener('message', receiveMessage, false);
+      if (window.opener) {
+        window.opener.postMessage('authorizing:github', '*');
       }
     })();
   </script></body></html>`);
