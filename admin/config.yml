@@ -2,14 +2,14 @@ backend:
   name: github
   repo: deansa1/ocm-website
   branch: main
-  base_url: https://ocm-website-draft-12hlb4xuy-deansa-9341s-projects.vercel.app
+  base_url: https://ocm-website-draft.vercel.app
   auth_endpoint: api/auth
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
-site_url: "https://ocm-website-draft-12hlb4xuy-deansa-9341s-projects.vercel.app"
-display_url: "https://ocm-website-draft-12hlb4xuy-deansa-9341s-projects.vercel.app"
+site_url: "https://ocm-website-draft.vercel.app"
+display_url: "https://ocm-website-draft.vercel.app"
 logo_url: "/assets/logo-lockup.webp"
 
 collections:
